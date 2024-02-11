@@ -1,2 +1,2 @@
-# geosparql-geojson
-An implementation of GeoSPARQL's Simple Features SPARQL functions for GeoJSON geometriess, as per GeoSPARQL
+# RDFLib GeoSPARQ functions for GeoJSON
+This library provides support for the GeoSPARQL 1.1 Simple Features Relation Family for geometries expressed as GeoJSON Literals. 
