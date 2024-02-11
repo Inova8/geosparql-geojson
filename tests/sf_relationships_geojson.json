@@ -1,0 +1,175 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "id": "geom_a",
+            "properties": {
+                "name": "geom_a"
+            },
+            "geometry": {
+                "coordinates": [
+                    [
+                        [
+                            0,
+                            1
+                        ],
+                        [
+                            4,
+                            1
+                        ],
+                        [
+                            4,
+                            5
+                        ],
+                        [
+                            0,
+                            5
+                        ],
+                        [
+                            0,
+                            1
+                        ]
+                    ]
+                ],
+                "type": "Polygon"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "geom_b",
+            "properties": {
+                "name": "geom_b"
+            },
+            "geometry": {
+                "coordinates": [
+                    [
+                        [
+                            0,
+                            1
+                        ],
+                        [
+                            2,
+                            1
+                        ],
+                        [
+                            2,
+                            3
+                        ],
+                        [
+                            0,
+                            3
+                        ],
+                        [
+                            0,
+                            1
+                        ]
+                    ]
+                ],
+                "type": "Polygon"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "geom_c",
+            "properties": {
+                "name": "geom_c"
+            },
+            "geometry": {
+                "coordinates": [
+                    [
+                        [
+                            4,
+                            3
+                        ],
+                        [
+                            6,
+                            3
+                        ],
+                        [
+                            6,
+                            5
+                        ],
+                        [
+                            4,
+                            5
+                        ],
+                        [
+                            4,
+                            3
+                        ]
+                    ]
+                ],
+                "type": "Polygon"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "geom_d",
+            "properties": {
+                "name": "geom_d"
+            },
+            "geometry": {
+                "coordinates": [
+                    [
+                        [
+                            3,
+                            0
+                        ],
+                        [
+                            5,
+                            0
+                        ],
+                        [
+                            5,
+                            2
+                        ],
+                        [
+                            3,
+                            2
+                        ],
+                        [
+                            3,
+                            0
+                        ]
+                    ]
+                ],
+                "type": "Polygon"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "geom_e",
+            "properties": {
+                "name": "geom_e"
+            },
+            "geometry": {
+                "coordinates": [
+                    [
+                        2,
+                        0
+                    ],
+                    [
+                        3,
+                        3
+                    ]
+                ],
+                "type": "LineString"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "geom_f",
+            "properties": {
+                "name": "geom_f"
+            },
+            "geometry": {
+                "coordinates": [
+                    2,
+                    4
+                ],
+                "type": "Point"
+            }
+        }
+    ]
+}
