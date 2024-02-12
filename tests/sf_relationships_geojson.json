@@ -170,6 +170,40 @@
                 ],
                 "type": "Point"
             }
+        },
+        {
+            "type": "Feature",
+            "id": "geom_g",
+            "properties": {
+                "name": "geom_g"
+            },
+            "geometry": {
+                "coordinates": [
+                    [
+                        [
+                            3,
+                            0
+                        ],
+                        [
+                            5,
+                            0
+                        ],
+                        [
+                            5,
+                            2
+                        ],
+                        [
+                            3,
+                            2
+                        ],
+                        [
+                            3,
+                            0
+                        ]
+                    ]
+                ],
+                "type": "Polygon"
+            }
         }
     ]
 }

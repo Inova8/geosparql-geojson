@@ -17,7 +17,7 @@ def within(a, b) -> Literal:
         return Literal(True)
     return Literal(False)
 def disjoint(a, b) -> Literal:
-    #Returns Literal(true) if the first geometry is disjoint with the second geometry.
+    # Returns Literal(true) if the first geometry is disjoint with the second geometry.
     geoA= toGeoJason(a)
     geoB= toGeoJason(b)
     if shapely.disjoint(geoA, geoB):

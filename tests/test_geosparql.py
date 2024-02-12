@@ -12,28 +12,30 @@ import json
 
 # image showing cells is in tests folder
 g = Graph()
-geom_a = URIRef("https://geom-a")
-geom_b = URIRef("https://geom-b")
-geom_c = URIRef("https://geom-c")
-geom_d = URIRef("https://geom-d")
-geom_e = URIRef("https://geom-e")
-geom_f = URIRef("https://geom-f")
-geom_g = URIRef("https://geom-g")
+geom_a = URIRef("https://geom-a") # POLYGON
+geom_b = URIRef("https://geom-b") # POLYGON
+geom_c = URIRef("https://geom-c") # POLYGON
+geom_d = URIRef("https://geom-d") # POLYGON
+geom_e = URIRef("https://geom-e") # POLYGON
+geom_f = URIRef("https://geom-f") # POINT
+geom_g = URIRef("https://geom-g") # LINESTRING
 
 geojsonFile= open("./tests/sf_relationships_geojson.json")
 geojson= json.load(geojsonFile)
 geojsonFile.close()
-
+ 
 get_element_by_key = lambda array,key,value: next(filter(lambda x: x[key] == value, array), {})
  
 
-g.add((geom_a, GEO.hasGeometry, Literal(get_element_by_key(geojson['features'],'id','geom_a')['geometry'])))
+g.add((geom_a, GEO.hasGeometry, Literal(get_element_by_key(geojson['features'],'id','geom_a')['geometry'],datatype=GEO.geoJSONLiteral)))
 g.add((geom_b, GEO.hasGeometry, Literal(get_element_by_key(geojson['features'],'id','geom_b')['geometry'])))
 g.add((geom_c, GEO.hasGeometry, Literal(get_element_by_key(geojson['features'],'id','geom_c')['geometry'])))
 g.add((geom_d, GEO.hasGeometry, Literal(get_element_by_key(geojson['features'],'id','geom_d')['geometry'])))
-#g.add((geom_e, GEO.hasGeometry, Literal(get_element_by_key(geojson['features'],'id','geom_e')['geometry'])))
-#g.add((geom_f, GEO.hasGeometry, Literal(get_element_by_key(geojson['features'],'id','geom_f')['geometry'])))
-g.add((geom_g, GEO.hasGeometry, Literal(get_element_by_key(geojson['features'],'id','geom_d')['geometry'])))
+g.add((geom_e, GEO.hasGeometry, Literal(get_element_by_key(geojson['features'],'id','geom_e')['geometry'])))
+g.add((geom_f, GEO.hasGeometry, Literal(get_element_by_key(geojson['features'],'id','geom_f')['geometry'])))
+g.add((geom_g, GEO.hasGeometry, Literal(get_element_by_key(geojson['features'],'id','geom_g')['geometry'])))
+
+# The test SPARQL creates the cartesian product of each test, 49 in total
 
 def test_direct():
     geom_a_value= g.value(geom_a, GEO.hasGeometry)
@@ -43,9 +45,10 @@ def test_direct():
 
 def test_contains():
     # A contains B
+    # A contains F
     # D contains G
     # G contains D  
-    # x contains x for A, B, C, D, G
+    # x contains x for A, B, C, D, G, F
     result = g.query(
         """PREFIX geo: <http://www.opengis.net/ont/geosparql#>
     SELECT ?a ?b {?a geo:hasGeometry ?a_geom .
@@ -53,14 +56,15 @@ def test_contains():
                 FILTER geo:sfContains(?a_geom, ?b_geom) }"""
     )
     result = [{str(k): v for k, v in i.items()} for i in result.bindings]
-    assert len(result) == 8
+    assert len(result) == 10
     #assert result[0]["a"] == geom_a and result[0]["b"] == geom_b
 
 def test_within():
     # B is within A
+    # F is within A
     # D is within G
     # G is within D  
-    # x is within x for A, B, C, D, G
+    # x is within x for A, B, C, D, G, F
     result = g.query(
         """PREFIX geo: <http://www.opengis.net/ont/geosparql#>
     SELECT ?a ?b {?a geo:hasGeometry ?a_geom .
@@ -68,7 +72,7 @@ def test_within():
                 FILTER geo:sfWithin(?a_geom, ?b_geom) }"""
     )
     result = [{str(k): v for k, v in i.items()} for i in result.bindings]
-    assert len(result) == 8
+    assert len(result) == 10
     #assert result[0]["a"] == geom_b and result[0]["b"] == geom_a
 
 def test_intersects():
@@ -91,7 +95,7 @@ def test_intersects():
                 }"""
     )
     result = [{str(k): v for k, v in i.items()} for i in result.bindings]
-    assert len(result) == 10
+    assert len(result) == 12
     assert {"a": geom_a, "b": geom_b} in result
     assert {"a": geom_a, "b": geom_c} in result
     assert {"a": geom_a, "b": geom_d} in result
@@ -170,7 +174,7 @@ def test_disjoint():
                 FILTER geo:sfDisjoint(?a_geom, ?b_geom) }"""
     )
     result = [{str(k): v for k, v in i.items()} for i in result.bindings]
-    assert len(result) == 10
+    assert len(result) == 18
     assert {"a": geom_b, "b": geom_c} in result
     assert {"a": geom_c, "b": geom_b} in result
     assert {"a": geom_b, "b": geom_d} in result
