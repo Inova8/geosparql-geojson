@@ -76,7 +76,7 @@ True
 
 
 - geo:sfEqual: Returns Literal(true) if the first geometry is equal to the second geometry.
-- dggeogs:sfWithin: Returns Literal(true) if the first geometry is within the second geometry.
+- geo:sfWithin: Returns Literal(true) if the first geometry is within the second geometry.
 - geo:sfContains: Returns Literal(true) if the first geometry contains the second geometry.
 - geo:sfIntersects: Returns Literal(true) if the first geometry intersects (i.e. has any spatial relation other than disjoint) the second geometry.
 - geo:sfTouches: Returns Literal(true) if the first geometry touches the second geometry.
