@@ -33,6 +33,6 @@ setup(
         "Natural Language :: English",
     ],
     test_suite="tests",
-    install_requires=["rdflib>=6.0.0", "shapely"],
+    install_requires=["rdflib>=7.0.0", "shapely"],
     tests_require=["pytest"],
 )
