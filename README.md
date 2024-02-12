@@ -51,11 +51,25 @@ for r in g.query(q):
 The results should be:
 
 ```
+https://geom-a is within https://geom-a
+https://geom-b is within https://geom-a
 https://geom-b is within https://geom-b
 https://geom-c is within https://geom-c
+https://geom-f is within https://geom-a
 https://geom-f is within https://geom-f
 ```
 
+The geojson functions can also be used directly with RDFLib as follows:
+
+```
+geojson.contains(Literal('''{"coordinates":[[[ 0,1],[4,1],[4,5],[0,5],[0,1]]],"type": "Polygon"}'''),
+                 Literal('''{"coordinates": [ 2,4],"type": "Point"}''')).value
+```
+
+which returns
+```
+True
+```
 
 # Function Definitions
 
@@ -70,3 +84,26 @@ geo:sfOverlaps: Returns Literal(true) if the first geometry overlaps the second 
 
 # Testing
 All tests are in tests/ and implemented using pytest.
+
+# Contributing
+Via GitHub, Issues & Pull Requests:
+
+https://github.com/Inova8/geosparql-geojson
+
+# License
+This code is licensed with the BSD 3-clause license as per LICENSE which is the same license as used for rdflib.
+
+# Citation
+@software{https://github.com/Inova8/geosparql-geojson,
+  author = {{Peter lawrence}},
+  title = {RDFlib GeoSPARQL Functions for GeoJSON},
+  version = {0.1.0},
+  date = {2024},
+  url = {https://github.com/Inova8/geosparql-geojson}
+}
+Contact
+Creator & maintainer:
+Peter Lawrence
+Application Architect
+inova8 plc
+peter.lawrence@inova8.com
