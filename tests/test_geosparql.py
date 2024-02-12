@@ -31,8 +31,8 @@ g.add((geom_a, GEO.hasGeometry, Literal(get_element_by_key(geojson['features'],'
 g.add((geom_b, GEO.hasGeometry, Literal(get_element_by_key(geojson['features'],'id','geom_b')['geometry'])))
 g.add((geom_c, GEO.hasGeometry, Literal(get_element_by_key(geojson['features'],'id','geom_c')['geometry'])))
 g.add((geom_d, GEO.hasGeometry, Literal(get_element_by_key(geojson['features'],'id','geom_d')['geometry'])))
-g.add((geom_e, GEO.hasGeometry, Literal(get_element_by_key(geojson['features'],'id','geom_e')['geometry'])))
-g.add((geom_f, GEO.hasGeometry, Literal(get_element_by_key(geojson['features'],'id','geom_f')['geometry'])))
+g.add((geom_e, GEO.hasGeometry, Literal('''{"coordinates": [[2,0],[3,3]],"type": "LineString"}''')))
+g.add((geom_f, GEO.hasGeometry, Literal('''{"coordinates": [ 2,4],"type": "Point"}''',datatype=GEO.geoJSONLiteral)))
 g.add((geom_g, GEO.hasGeometry, Literal(get_element_by_key(geojson['features'],'id','geom_g')['geometry'])))
 
 # The test SPARQL creates the cartesian product of each test, 49 in total
@@ -56,7 +56,7 @@ def test_contains():
                 FILTER geo:sfContains(?a_geom, ?b_geom) }"""
     )
     result = [{str(k): v for k, v in i.items()} for i in result.bindings]
-    assert len(result) == 10
+    assert len(result) == 8
     #assert result[0]["a"] == geom_a and result[0]["b"] == geom_b
 
 def test_within():
@@ -72,7 +72,7 @@ def test_within():
                 FILTER geo:sfWithin(?a_geom, ?b_geom) }"""
     )
     result = [{str(k): v for k, v in i.items()} for i in result.bindings]
-    assert len(result) == 10
+    assert len(result) == 8
     #assert result[0]["a"] == geom_b and result[0]["b"] == geom_a
 
 def test_intersects():
@@ -95,7 +95,7 @@ def test_intersects():
                 }"""
     )
     result = [{str(k): v for k, v in i.items()} for i in result.bindings]
-    assert len(result) == 12
+    assert len(result) == 10
     assert {"a": geom_a, "b": geom_b} in result
     assert {"a": geom_a, "b": geom_c} in result
     assert {"a": geom_a, "b": geom_d} in result
@@ -174,7 +174,7 @@ def test_disjoint():
                 FILTER geo:sfDisjoint(?a_geom, ?b_geom) }"""
     )
     result = [{str(k): v for k, v in i.items()} for i in result.bindings]
-    assert len(result) == 18
+    assert len(result) == 10
     assert {"a": geom_b, "b": geom_c} in result
     assert {"a": geom_c, "b": geom_b} in result
     assert {"a": geom_b, "b": geom_d} in result

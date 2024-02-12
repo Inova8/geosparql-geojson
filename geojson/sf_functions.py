@@ -1,5 +1,6 @@
 from rdflib import Literal
 import shapely
+import json
 #from shapely import LineString, Point, Polygon, contains
 
 def contains(a, b) -> Literal:
@@ -53,13 +54,17 @@ def equals(a, b) -> Literal:
         return Literal(True)
     return Literal(False)
 def toGeoJSON(geometry:Literal):
-    match  geometry.value['type']:
+    if(isinstance(geometry.value,str)):
+        value= json.loads(geometry.value)
+    else:
+        value = geometry.value
+    match  value['type']:
         case 'Point':
-            return shapely.Point(geometry.value['coordinates'])
+            return shapely.Point(value['coordinates'])
         case 'Polygon':
-            return shapely.Polygon(geometry.value['coordinates'][0])
+            return shapely.Polygon(value['coordinates'][0])
         case 'LineString':
-            return shapely.LineString(geometry.value['coordinates'][0])
+            return shapely.LineString(value['coordinates'][0])
         case _:
             return None
     
