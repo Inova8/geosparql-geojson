@@ -1,11 +1,12 @@
 from rdflib import Literal, Graph, Namespace, URIRef
 from rdflib.namespace import GEO
 import geojson
+import json
 
 g = Graph()
-g.add((URIRef('https://geom-a'), GEO.hasGeometry, Literal('''{"coordinates":[[[ 0,1],[4,1],[4,5],[0,5],[0,1]]],"type": "Polygon"}''')))
-g.add((URIRef('https://geom-b'), GEO.hasGeometry, Literal('''{"coordinates": [[[ 0,1],[2,1],[2,3],[0,3],[0,1]]],"type": "Polygon"}''')))
-g.add((URIRef('https://geom-c'), GEO.hasGeometry, Literal('''{"coordinates": [[[ 4,3],[6,3],[6,5],[4,5],[4,3]]], "type": "Polygon"}''')))
+g.add((URIRef('https://geom-a'), GEO.hasGeometry, Literal('''{"coordinates":[[[ 0,1],[4,1],[4,5],[0,5],[0,1]]],"type": "Polygon"}''',datatype=GEO.geoJSONLiteral)))
+g.add((URIRef('https://geom-b'), GEO.hasGeometry, Literal(json.loads('''{"coordinates": [[[ 0,1],[2,1],[2,3],[0,3],[0,1]]],"type": "Polygon"}'''))))
+g.add((URIRef('https://geom-c'), GEO.hasGeometry, Literal(json.loads('''{"coordinates": [[[ 4,3],[6,3],[6,5],[4,5],[4,3]]],"type": "Polygon"}'''),datatype=GEO.geoJSONLiteral)))
 g.add((URIRef('https://geom-e'), GEO.hasGeometry, Literal('''{"coordinates": [[2,0],[3,3]],"type": "LineString"}''')))
 g.add((URIRef('https://geom-f'), GEO.hasGeometry, Literal('''{"coordinates": [ 2,4],"type": "Point"}''')))
 

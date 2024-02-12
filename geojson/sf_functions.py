@@ -54,10 +54,13 @@ def equals(a, b) -> Literal:
         return Literal(True)
     return Literal(False)
 def toGeoJSON(geometry:Literal):
-    if(isinstance(geometry.value,str)):
-        value= json.loads(geometry.value)
+    geometryValue = geometry.value
+    if geometryValue is None:
+        geometryValue = geometry
+    if (isinstance(geometryValue,str)):
+        value= json.loads(geometryValue)
     else:
-        value = geometry.value
+        value = geometryValue
     match  value['type']:
         case 'Point':
             return shapely.Point(value['coordinates'])

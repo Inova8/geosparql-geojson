@@ -56,7 +56,7 @@ def test_contains():
                 FILTER geo:sfContains(?a_geom, ?b_geom) }"""
     )
     result = [{str(k): v for k, v in i.items()} for i in result.bindings]
-    assert len(result) == 8
+    assert len(result) == 10
     #assert result[0]["a"] == geom_a and result[0]["b"] == geom_b
 
 def test_within():
@@ -72,7 +72,7 @@ def test_within():
                 FILTER geo:sfWithin(?a_geom, ?b_geom) }"""
     )
     result = [{str(k): v for k, v in i.items()} for i in result.bindings]
-    assert len(result) == 8
+    assert len(result) == 10
     #assert result[0]["a"] == geom_b and result[0]["b"] == geom_a
 
 def test_intersects():
@@ -95,7 +95,7 @@ def test_intersects():
                 }"""
     )
     result = [{str(k): v for k, v in i.items()} for i in result.bindings]
-    assert len(result) == 10
+    assert len(result) == 12
     assert {"a": geom_a, "b": geom_b} in result
     assert {"a": geom_a, "b": geom_c} in result
     assert {"a": geom_a, "b": geom_d} in result
@@ -174,7 +174,7 @@ def test_disjoint():
                 FILTER geo:sfDisjoint(?a_geom, ?b_geom) }"""
     )
     result = [{str(k): v for k, v in i.items()} for i in result.bindings]
-    assert len(result) == 10
+    assert len(result) == 18
     assert {"a": geom_b, "b": geom_c} in result
     assert {"a": geom_c, "b": geom_b} in result
     assert {"a": geom_b, "b": geom_d} in result
